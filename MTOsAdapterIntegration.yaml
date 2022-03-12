@@ -1,0 +1,1634 @@
+openapi: 3.0.0
+info:
+  title: MTO's Adapter
+  version: 1.0.0
+servers:
+  - url: http://api.example.com/v1
+    description: Test (Development) server
+paths:
+  /api/Mtos/recipientaccountvalidation:
+    post:
+      requestBody:
+        description: 'Validate the recipient account number or mobile wallet number'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipient'
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  schema:
+                    $ref: '#/components/schemas/Validated'
+        '203':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '405':
+          description: Method Not Allowed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+        - Mtos
+  /api/Mtos/createnewpaymentorder:
+    post:
+      summary: ''
+      description: 'Create a new Payment Order'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MtosPaymentOrderRequest'
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    $ref: '#/components/schemas/OrderSuccess'
+                  message:
+                    type: string
+                    example: Order placed successfully.
+        '203':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '405':
+          description: Method Not Allowed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+        - Mtos
+  /api/Mtos/getpaymentorderstatus:
+    post:
+      summary: ''
+      description: 'Get Payment Order Status'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderQuery'
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderStatus'
+        '203':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '405':
+          description: Method Not Allowed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+      - Mtos
+  /api/Mtos/getpaymentorderdetails:
+    post:
+      summary: ''
+      description: 'Get Payment Order Details'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderQuery'
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderStatus'
+        '203':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '405':
+          description: Method Not Allowed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+      - Mtos
+  /api/Mtos/cancelpendingpaymentorder:
+    post:
+      summary: ''
+      description: 'Cancel Pending Payment Order'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cancelOrderQuery'
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cancelOrderStatus'
+        '203':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '405':
+          description: Method Not Allowed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+      - Mtos
+  /api/Mtos/getpaymentorders:
+    post:
+      summary: ''
+      description: 'Get Payment orders with specified parameters'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/paymentOrderQuery'
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentRequest'
+        '203':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '405':
+          description: Method Not Allowed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+      - Mtos
+  /api/Mtos/getexchangerates:
+    post:
+      summary: ''
+      description: 'Get exchange rates published for the specified date'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object 
+              properties:
+                date:
+                  type: string
+                  example: "2021-12-11T16:57:59.431Z"
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forexExchange'
+        '203':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '405':
+          description: Method Not Allowed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+      - Mtos
+  /api/Mtos/getaccountbalance:
+    get:
+      summary: ''
+      description: 'Get MTO account balance'
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBalance'
+        '203':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '405':
+          description: Method Not Allowed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+      - Mtos
+  /api/shared/getcurrencies:
+    get:
+      summary: ''
+      description: 'Get all currencies in the system'
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/currency'
+        '203':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '405':
+          description: Method Not Allowed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+      - Shared
+  /api/shared/getcountries:
+    get:
+      summary: ''
+      description: 'Get all countries'
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/country'
+        '203':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '405':
+          description: Method Not Allowed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+      - Shared
+  /api/shared/getbanks:
+    get:
+      summary: ''
+      description: 'Get all banks'
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/bank'
+        '203':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '405':
+          description: Method Not Allowed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+      - Shared
+  /api/shared/getbankbranches:
+    get:
+      summary: ''
+      description: 'Get bank branches'
+      parameters:
+        - name: bankId
+          in: query
+          required: true
+          schema:
+            type: integer
+            example: 456
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/bankBranches'
+        '203':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+        '405':
+          description: Method Not Allowed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+      - Shared
+  
+components:
+  schemas:
+    Recipient:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'The type is 1 of 2 strings; MobileWallet or BankAccount'
+          example: MobileWallet 
+        bankAccount:
+          type: string
+          example: 6748HJ
+        bankCode:
+          type: string
+          example: '7689'
+        mobileWalletPrefix:
+          type: string
+          example: pre-
+        mobileWalletAccountNumber:
+          type: string
+          example: 670TYG
+        senderCountry:
+          type: string
+          example: UK
+        sender:
+          type: string
+          example: 67gh897hj
+        purpose:
+          type: string
+          example: Car Purchase
+    Validated:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/GIPTransactionResponse'
+        message:
+          type: string
+          example: Recipient validated
+    GIPTransactionResponse:
+      type: object
+      properties:
+        amount:
+          type: string
+          example: 100$
+        datetime:
+          type: string
+          example: 12-12-2021
+        trackingNum:
+          type: string
+          example: 43bhjb
+        functionCode:
+          type: string
+          example: ghf78
+        origineBank:
+          type: string
+          example: SBP
+        destBank:
+          type: string
+          example: SBP
+        sessionID:
+          type: string
+          example: '100'
+        nameToDebit:
+          type: string
+          example: John
+        accountToDebit:
+          type: string
+          example: bvgjksdghf78
+        narration:
+          type: string
+          example: bnfj jnkfd njk
+        actCode:
+          type: string
+          example: HGKJ798
+        aprvCode:
+          type: string
+          example: 7HUJ98
+        statusQuery:
+          type: string
+          example: '200'
+    MtosPaymentOrderRequest:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: 'The type is 1 of 2 strings; MobileWallet or BankAccount'
+          example: '200'
+        date:
+          type: string
+          example: '2021-12-11T16:57:59.073Z'
+        orderNo:
+          type: string
+          example: '102'
+        pin:
+          type: string
+          example: AB79
+        sendingCorrespondenceSequenceId:
+          type: number
+          example: 0
+        payingCorrespondenceSeqequenceId:
+          type: number
+          example: 0
+        salesDate:
+          type: string
+          example: 12-12-2021
+        salesTime:
+          type: string
+          example: '05:00'
+        countryFrom:
+          type: string
+          example: UK
+        countryTo:
+          type: string
+          example: UK
+        payingCorrespondenceLocationId:
+          type: number
+          example: 0
+        sendingCorrespondenceBranchNumber:
+          type: string
+          example: HN67
+        beneficiaryQuestion:
+          type: string
+          example: Your First Pet Name?
+        beneficiaryAnswer:
+          type: string
+          example: toucan
+        paymentInstructions:
+          type: string
+          example: ReadMe
+        originalCurrency:
+          type: string
+          example: USD
+        originalAmount:
+          type: number
+          example: 1000
+        deliveryMethod:
+          type: string
+          example: Inter bank
+        paymentCurrency:
+          type: string
+          example: USD
+        paymentAmount:
+          type: number
+          example: 1000
+        comissionCurrency:
+          type: string
+          example: USD
+        commissionAmount:
+          type: number
+          example: 50
+        customerChargeCurrency:
+          type: string
+          example: USD
+        customerChargeAmount:
+          type: number
+          example: 10
+        beneficiaryId:
+          type: string
+          example: 0DFUI56787
+        beneficiaryFullName:
+          type: string
+          example: Jane Doe
+        beneficiaryFirstName:
+          type: string
+          example: Jane
+        beneficiaryMiddleName:
+          type: string
+          example: Smith
+        beneficiaryLastName:
+          type: string
+          example: Doe
+        beneficiaryLastName2:
+          type: string
+          example: Doe
+        beneficiaryAddress:
+          type: string
+          example: abc,xyz
+        beneficiaryCity:
+          type: string
+          example: London
+        beneficiaryState:
+          type: string
+          example: st
+        beneficiaryZipcode:
+          type: string
+          example: 1234
+        beneficiaryCountry:
+          type: string
+          example: UK
+        beneficiaryPhoneNumber:
+          type: string
+          example: 564873658
+        beneficiaryCellNumber:
+          type: string
+          example: 6548756398
+        beneficiaryMessage:
+          type: string
+          example: "jvijdkfj njkhfnvk"
+        customerId:
+          type: string
+          example: Jane Doe
+        customerFullName:
+          type: string
+          example: Jane Doe
+        customerFirstName:
+          type: string
+          example: Jane
+        customerMiddleName:
+          type: string
+          example: Smith
+        customerLastName:
+          type: string
+          example: Doe
+        customerLastName2:
+          type: string
+          example: Doe
+        customerAddress:
+          type: string
+          example: abc,xyz
+        customerCountry:
+          type: string
+          example: London
+        customerId1Type:
+          type: string
+          example: bvhjdbvj
+        customerId1Number:
+          type: string
+          example: bvhjdbvj
+        customerId1IssuedBy:
+          type: string
+          example: bvhjdbvj
+        customerId1IssuedByState:
+          type: string
+          example: bvhjdbvj
+        customerId1IssuedByCountry:
+          type: string
+          example: bvhjdbvj
+        customerId1IssuedDate:
+          type: string
+          example: bvhjdbvj
+        customerId1IssuedExpirationDate:
+          type: string
+          example: bvhjdbvj
+        customerId2Type:
+          type: string
+          example: bvhjdbvj
+        customerId2Number:
+          type: string
+          example: bvhjdbvj
+        customerId2IssuedBy:
+          type: string
+          example: bvhjdbvj
+        customerId2IssuedByState:
+          type: string
+          example: bvhjdbvj
+        customerId2IssuedByCountry:
+          type: string
+          example: bvhjdbvj
+        customerId2IssuedDate:
+          type: string
+          example: bvhjdbvj
+        customerId2IssuedExpirationDate:
+          type: string
+          example: bvhjdbvj
+        customerId3Type:
+          type: string
+          example: bvhjdbvj
+        customerId3Number:
+          type: string
+          example: bvhjdbvj
+        customerId3IssuedBy:
+          type: string
+          example: bvhjdbvj
+        customerId3IssuedByState:
+          type: string
+          example: bvhjdbvj
+        customerId3IssuedByCountry:
+          type: string
+          example: bvhjdbvj
+        customerId3IssuedDate:
+          type: string
+          example: bvhjdbvj
+        customerId3IssuedExpirationDate:
+          type: string
+          example: bvhjdbvj
+        customerTaxId:
+          type: string
+          example: bvhjdbvj
+        customerTaxCountry:
+          type: string
+          example: bvhjdbvj
+        customerCountryOfBirth:
+          type: string
+          example: bvhjdbvj
+        customerNationality:
+          type: string
+          example: bvhjdbvj
+        customerDateOfBirth:
+          type: string
+          example: bvhjdbvj
+        customerOccupation:
+          type: string
+          example: bvhjdbvj
+        customerOfFunds:
+          type: string
+          example: bvhjdbvj
+        Purpose:
+          type: string
+          example: bvhjdbvj
+        bankName:
+          type: string
+          example: bvhjdbvj
+        bankAccountType:
+          type: string
+          example: bvhjdbvj
+        bankAccountNo:
+          type: string
+          example: bvhjdbvj
+        beneficiaryIdType:
+          type: string
+          example: bvhjdbvj
+        beneficiaryIdNumber:
+          type: string
+          example: bvhjdbvj
+        beneficiaryTaxId:
+          type: string
+          example: bvhjdbvj
+        bankCity:
+          type: string
+          example: bvhjdbvj
+        bankBranchName:
+          type: string
+          example: bvhjdbvj
+        bankBranchNumber:
+          type: string
+          example: bvhjdbvj
+        bankBranchAddress:
+          type: string
+          example: bvhjdbvj
+        bankCode:
+          type: string
+          example: bvhjdbvj
+        bankRoutingCode:
+          type: string
+          example: bvhjdbvj
+        bankIdentifierCodeOrSWIFT:
+          type: string
+          example: bvhjdbvj
+        unitaryBankAccountNumber:
+          type: string
+          example: bvhjdbvj
+        callBackUrl:
+          type: string
+          example: bvhjdbvj
+    OrderSuccess:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        id:
+          type: integer
+          example: 1
+        transactionId:
+          type: string
+          example: '100'
+        orderNo:
+          type: string
+          example: GH6DB890
+    OrderQuery:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          example: '100'
+        orderNo:
+          type: string
+          example: GH6DB890
+    OrderStatus:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        id:
+          type: integer
+          example: 1
+        transactionId:
+          type: string
+          example: '100'
+        orderNo:
+          type: string
+          example: GH6DB890
+        status:
+          type: boolean
+          example: true
+    cancelOrderQuery:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          example: G7J9DG4
+        orderNo:
+          type: string
+          example: G7J9DG4
+        reason:
+          type: string
+          example: vgcdsgch kjghj bjhhjgj
+    cancelOrderStatus:
+      type: object
+      properties:
+        cancelled:
+          type: boolean
+          example: true
+        transactionId:
+          type: string
+          example: '100'
+        orderNo:
+          type: string
+          example: GH6DB890
+        message:
+          type: string
+          example: vcghds ghvb vgh vhjb vgh
+    paymentOrderQuery:
+      type: object
+      properties:
+        startDate:
+          type: string
+          example: 12-12-2021
+        endDate:
+          type: string
+          example: 20-12-2021
+        page:
+          type: integer
+          example: 0
+        size:
+          type: integer
+          example: 0
+    paymentRequest:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            example: 1
+          createdBy:
+            type: string
+            example: admin
+          modifiedBy:
+            type: string
+            example: owner
+          createdAt:
+            type: string
+            example: 10-12-2021
+          modifiedAt:
+            type: string
+            example: 13-12-2021
+          moneyTransferOperatorId:
+            type: integer
+            example: 7438
+          moneyTransferOperator:
+            $ref: "#/components/schemas/moneyOperator"
+          requestId:
+            type: string
+            example: 68gfh879d
+          transactionId:
+            type: string
+            example: 68gfh879d
+          reference:
+            type: string
+            example: 68gfh879d
+          date:
+            type: string
+            example: 68gfh879d
+          orderNo:
+            type: string
+            example: 12-12-2021
+          pin:
+            type: string
+            example: 68gfh879d
+          sendingCorrespondenceSequenceId:
+            type: integer
+            example: 65784
+          payingCorrespondenceSequenceId:
+            type: integer
+            example: 768956
+          salesDate:
+            type: string
+            example: 14-12-2021
+          salesTime:
+            type: string
+            example: 03-00 PM
+          countryFrom:
+            type: string
+            example: UK
+          countryTo:
+            type: string
+            example: UK
+          payingCorrespondenceLocationId:
+            type: integer
+            example: 6786
+          payingCorrespondenceBranchNumber:
+            type: string
+            example: gjyc564
+          beneficiaryQuestion:
+            type: string
+            example: ghjfgyg?
+          beneficiaryAnswer:
+            type: string
+            example: gbvhfgjr.
+          beneficiaryInstructions:
+            type: string
+            example: bhdfhjfgrkjf hjkgh  hkgjk
+          originalCurrency:
+            type: string
+            example: USD
+          originalAmount:
+            type: integer
+            example: 500
+          delieveryMethod:
+            type: string
+            example: by post
+          paymentCurrency:
+            type: string
+            example: USD
+          paymentAmount:
+            type: integer
+            example: 500
+          commissionCurrency:
+            type: string
+            example: USD
+          commissionAmount:
+            type: integer
+            example: 500
+          customerChargeCurrency:
+            type: string
+            example: USD
+          customerChargeAmount:
+            type: integer
+            example: 500        
+          beneficiaryId:
+            type: string
+            example: 0DFUI56787
+          beneficiaryFullName:
+            type: string
+            example: Jane Doe
+          beneficiaryFirstName:
+            type: string
+            example: Jane
+          beneficiaryMiddleName:
+            type: string
+            example: Smith
+          beneficiaryLastName:
+            type: string
+            example: Doe
+          beneficiaryLastName2:
+            type: string
+            example: Doe
+          beneficiaryAddress:
+            type: string
+            example: abc,xyz
+          beneficiaryCity:
+            type: string
+            example: London
+          beneficiaryState:
+            type: string
+            example: st
+          beneficiaryZipcode:
+            type: string
+            example: 1234
+          beneficiaryCountry:
+            type: string
+            example: UK
+          beneficiaryPhoneNumber:
+            type: string
+            example: 564873658
+          beneficiaryCellNumber:
+            type: string
+            example: 6548756398
+          beneficiaryMessage:
+            type: string
+            example: "jvijdkfj njkhfnvk"
+          customerId:
+            type: string
+            example: Jane Doe
+          customerFullName:
+            type: string
+            example: Jane Doe
+          customerFirstName:
+            type: string
+            example: Jane
+          customerMiddleName:
+            type: string
+            example: Smith
+          customerLastName:
+            type: string
+            example: Doe
+          customerLastName2:
+            type: string
+            example: Doe
+          customerAddress:
+            type: string
+            example: abc,xyz
+          customerCountry:
+            type: string
+            example: London
+          customerId1Type:
+            type: string
+            example: bvhjdbvj
+          customerId1Number:
+            type: string
+            example: bvhjdbvj
+          customerId1IssuedBy:
+            type: string
+            example: bvhjdbvj
+          customerId1IssuedByState:
+            type: string
+            example: bvhjdbvj
+          customerId1IssuedByCountry:
+            type: string
+            example: bvhjdbvj
+          customerId1IssuedDate:
+            type: string
+            example: bvhjdbvj
+          customerId1IssuedExpirationDate:
+            type: string
+            example: bvhjdbvj
+          customerId2Type:
+            type: string
+            example: bvhjdbvj
+          customerId2Number:
+            type: string
+            example: bvhjdbvj
+          customerId2IssuedBy:
+            type: string
+            example: bvhjdbvj
+          customerId2IssuedByState:
+            type: string
+            example: bvhjdbvj
+          customerId2IssuedByCountry:
+            type: string
+            example: bvhjdbvj
+          customerId2IssuedDate:
+            type: string
+            example: bvhjdbvj
+          customerId2IssuedExpirationDate:
+            type: string
+            example: bvhjdbvj
+          customerId3Type:
+            type: string
+            example: bvhjdbvj
+          customerId3Number:
+            type: string
+            example: bvhjdbvj
+          customerId3IssuedBy:
+            type: string
+            example: bvhjdbvj
+          customerId3IssuedByState:
+            type: string
+            example: bvhjdbvj
+          customerId3IssuedByCountry:
+            type: string
+            example: bvhjdbvj
+          customerId3IssuedDate:
+            type: string
+            example: bvhjdbvj
+          customerId3IssuedExpirationDate:
+            type: string
+            example: bvhjdbvj
+          customerId4Type:
+            type: string
+            example: bvhjdbvj
+          customerId4Number:
+            type: string
+            example: bvhjdbvj
+          customerId4IssuedBy:
+            type: string
+            example: bvhjdbvj
+          customerId4IssuedByState:
+            type: string
+            example: bvhjdbvj
+          customerId4IssuedByCountry:
+            type: string
+            example: bvhjdbvj
+          customerId4IssuedDate:
+            type: string
+            example: bvhjdbvj
+          customerId4IssuedExpirationDate:
+            type: string
+            example: bvhjdbvj
+          customerTaxId:
+            type: string
+            example: bvhjdbvj
+          customerTaxCountry:
+            type: string
+            example: bvhjdbvj
+          customerCountryOfBirth:
+            type: string
+            example: bvhjdbvj
+          customerNationality:
+            type: string
+            example: bvhjdbvj
+          customerDateOfBirth:
+            type: string
+            example: bvhjdbvj
+          customerOccupation:
+            type: string
+            example: bvhjdbvj
+          customerOfFunds:
+            type: string
+            example: bvhjdbvj
+          Purpose:
+            type: string
+            example: bvhjdbvj
+          bankName:
+            type: string
+            example: bvhjdbvj
+          bankAccountType:
+            type: string
+            example: bvhjdbvj
+          bankAccountNo:
+            type: string
+            example: bvhjdbvj
+          beneficiaryIdType:
+            type: string
+            example: bvhjdbvj
+          beneficiaryIdNumber:
+            type: string
+            example: bvhjdbvj
+          beneficiaryTaxId:
+            type: string
+            example: bvhjdbvj
+          bankCity:
+            type: string
+            example: bvhjdbvj
+          bankBranchName:
+            type: string
+            example: bvhjdbvj
+          bankBranchNumber:
+            type: string
+            example: bvhjdbvj
+          bankBranchAddress:
+            type: string
+            example: bvhjdbvj
+          bankCode:
+            type: string
+            example: bvhjdbvj
+          bankRoutingCode:
+            type: string
+            example: bvhjdbvj
+          bankIdentifierCodeOrSWIFT:
+            type: string
+            example: bvhjdbvj
+          unitaryBankAccountNumber:
+            type: string
+            example: bvhjdbvj
+          valueType:
+            type: string
+            example: ghjgjhy
+          mobileWalletPrefix:
+            type: string
+            example: pro
+          mobileWalletAccountNumber:
+            type: string
+            example: 78954hjg47
+          status:
+            type: integer
+            enum: [14]
+          rejectionReason:
+            type: string
+            example: hjdjfjh ughuk gyjg ju
+          paymentFailedReason:
+            type: string
+            example: gbjh gjh gf klujloi p;oler 
+          verificationFailedReason:
+            type: string
+            example: ghyjkhfku
+          cancellationReason:
+            type: string
+            example: hkfejhjuy nkjh fjhg
+          callBackUrl:
+            type: string
+            example: hyjhkug
+    moneyOperator:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        createdBy:
+          type: string
+          example: admin
+        modifiedBy:
+          type: string
+          example: owner
+        createdAt:
+          type: string
+          example: 10-12-2021
+        modifiedAt:
+          type: string
+          example: 13-12-2021
+        name:
+          type: string
+          example: abc
+        code:
+          type: string
+          example: nvhjkh
+        address:
+          type: string
+          example: vjkrh jkkkj, ghjbj
+        contactPersonName:
+          type: string
+          example: john
+        contactEmail:
+          type: string
+          example: abc@gmail.com
+        contactPhoneNumber:
+          type: string
+          example: 6483749384
+        isActive:
+          type: boolean
+          example: true
+        authToken:
+          type: string
+          example: gvukgjuy
+        authPin:
+          type: string
+          example: guifd768
+        countryId:
+          type: integer
+          example: 789
+        country:
+          $ref: "#/components/schemas/country"
+    country:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 200
+        code: 
+          type: string
+          example: 6834
+        name:
+          type: string
+          example: UK
+        notes:
+          type: string
+          example: hkjrgfujy
+    forexExchange:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 100
+        forexId:
+          type: integer
+          example: 200
+        date:
+          type: string
+          example: 20-12-2021
+        moneyTransferOperatorId:  
+          type: integer
+          example: 6437
+        moneyTranferOperator:
+          $ref: "#/components/schemas/moneyOperator"
+        publishedBy:
+          type: string
+          example: admin
+        data:
+          $ref: "#/components/schemas/forexCurrency"
+    forexCurrency:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 100
+        forexId:
+          type: integer
+          example: 200
+        rate:
+          type: number
+          example: 50.5
+        currencyId:
+          type: integer
+          example: 500
+        currency:
+          $ref: "#/components/schemas/currency"
+        symbol:
+          type: string
+          example: $
+    currency:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 798
+        notes:
+          type: string
+          example: jkfdhrk
+        symbol:
+          type: string
+          example: $
+        name:
+          type: string
+          example: usd
+        code:
+          type: string
+          example: DG4XS34
+    AccountBalance:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 100
+        moneyTransferOperatorId:
+          type: integer
+          example: 78979
+        moneyTranferOperator:
+          $ref: "#/components/schemas/moneyOperator"
+        description:
+          type: string
+          example: hukhrhgu
+        balance:
+          type: integer
+          example: 200
+        limit:
+          type: integer
+          example: 1000
+    bank:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 798
+        notes:
+          type: string
+          example: jkfdhrk
+        name:
+          type: string
+          example: usd
+        code:
+          type: string
+          example: DG4XS34
+    bankBranches:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 798
+        name:
+          type: string
+          example: usd
+        code:
+          type: string
+        location:
+          type: string
+          example: bgvjkdghjkjg
+        bankId:
+          type: integer
+          example: 6893
+        bank:
+          $ref: "#/components/schemas/bank"
